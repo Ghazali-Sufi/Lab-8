@@ -1,5 +1,9 @@
 let multipleButtons = document.querySelectorAll('.multipleChoice');
- let multipleIsAnswered = false;
+let multipleIsAnswered = false;
+
+let answerButton = document.querySelector('.answer')
+let freeIsAnswered = false;
+
 
 
 for(let multipleButton of multipleButtons) {
@@ -9,7 +13,7 @@ for(let multipleButton of multipleButtons) {
         if (multipleIsAnswered == true) {
           return;
         }
-        const currentElement = e.target
+        const currentElement = e.target;
         if (currentElement.classList.contains("correct")) {
           e.target.style.background = "#00ab41";
           h4.textContent = "Correct";
@@ -24,3 +28,24 @@ for(let multipleButton of multipleButtons) {
     })
 }
 
+
+answerButton.addEventListener('click', function(e) {
+    if(freeIsAnswered == true) {
+        return;
+    }
+    const inputField = document.querySelector("#answerInput");
+    let answerValue = inputField.value;
+    let newH4Element = document.createElement('h4');
+    if (Number(answerValue) === 70) {
+      inputField.style.background = "green";
+      newH4Element.textContent = "Correct"
+
+    } else {
+      inputField.style.background = "red";
+        newH4Element.textContent = "Incorrect";
+    }
+
+    let divElement = inputField.parentElement;
+    divElement.appendChild(newH4Element);
+    freeIsAnswered = true
+})
